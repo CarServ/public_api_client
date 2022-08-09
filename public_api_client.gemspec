@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/CarServ/public_api_client'
   s.license     = ''
   s.add_dependency 'faraday', '~> 2.4'
+  s.add_dependency 'redis'
 end

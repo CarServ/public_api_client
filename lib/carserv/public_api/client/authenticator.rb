@@ -3,6 +3,7 @@
 require_relative 'config'
 require 'faraday'
 require 'faraday/net_http'
+require 'redis'
 Faraday.default_adapter = :net_http
 
 module Carserv
@@ -15,30 +16,25 @@ module Carserv
           end
 
           def refresh_access_token
-            get_new_access_token
-          end
-
-          def call_api
-            request_access_token
+            new_access_token
           end
 
           private
 
           def fetch_access_token
-            p "Fetching access token"
-            token = $redis.hget(storage_address, :access_token)
-            token.present? ? token : get_new_access_token
+            token = redis.hget(storage_address, :access_token)
+            token || new_access_token
           end
 
           def cache_access_token(token)
-            $redis.hset(storage_address, :access_token, token)
+            redis.hset(storage_address, :access_token, token)
           end
 
-          def get_new_access_token
+          def new_access_token
             request do
-              puts "Getting new_access token"
               new_token = request_access_token
-              cache_access_token(new_token) if new_token.present?
+              cache_access_token(new_token) if new_token
+              new_token
             end
           end
 
@@ -59,6 +55,10 @@ module Carserv
 
           def storage_address
             "access_token_#{Carserv::PublicApi::Client.config.api_key}"
+          end
+
+          def redis
+            Redis.new
           end
 
           def request
