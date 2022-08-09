@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'carserv/public_api/client/config'
-require_relative 'carserv/public_api/client/repair_order'
 
 module Carserv
   module PublicApi
