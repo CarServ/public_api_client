@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
+require 'json_api_client'
+
 module Carserv
   module PublicApi
     module Client
-      class Base
+      class Base < JsonApiClient::Resource
+        self.site = 'http://localhost:3000'
         class << self
           def list(page: 1)
             request do
@@ -12,12 +15,7 @@ module Carserv
 
           def fetch(id:)
             request do
-
             end
-          end
-
-          def test
-            p "HELLO"
           end
 
           def request

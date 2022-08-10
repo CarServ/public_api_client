@@ -22,12 +22,12 @@ module Carserv
           private
 
           def fetch_access_token
-            token = redis.hget(storage_address, :access_token)
+            token = redis.hget(cache_key, :access_token)
             token || new_access_token
           end
 
           def cache_access_token(token)
-            redis.hset(storage_address, :access_token, token)
+            redis.hset(cache_key, :access_token, token)
           end
 
           def new_access_token
@@ -53,7 +53,7 @@ module Carserv
             response_body['jwt'] || nil
           end
 
-          def storage_address
+          def cache_key
             "access_token_#{Carserv::PublicApi::Client.config.api_key}"
           end
 
