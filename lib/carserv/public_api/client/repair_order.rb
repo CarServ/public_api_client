@@ -8,9 +8,10 @@ module Carserv
     module Client
       class RepairOrder < Carserv::PublicApi::Client::Base
         class << self
-          def list(page: 1)
+          def list(start_date:, end_date:, page: 1)
             request do
-              puts "Hello from lister"
+              includes(:customer)
+                .with_params(from: start_date, to: end_date).page(page).all
             end
           end
 

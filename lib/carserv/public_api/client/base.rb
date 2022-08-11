@@ -22,12 +22,6 @@ module Carserv
 
           def request
             yield
-          rescue JsonApiClient::Errors::AccessDenied
-            puts 'Access Denied!'
-          rescue JsonApiClient::Errors::BadGateway
-            puts 'BadGateway!'
-          rescue JsonApiClient::Errors::GatewayTimeout
-            puts 'Gateway Timeout!'
           rescue JsonApiClient::Errors::InternalServerError
             puts 'Internal Server Error!'
           rescue JsonApiClient::Errors::NotAuthorized
@@ -39,8 +33,8 @@ module Carserv
           rescue JsonApiClient::Errors::TooManyRequests
             puts 'Too Many Requests!'
           rescue Net::OpenTimeout, Net::ReadTimeout
-            puts 'Oepn/Read Timeout!'
-          rescue Carserv::PublicApi::Client::Errors::RateLimitError
+            puts 'Open/Read Timeout!'
+          # rescue Carserv::PublicApi::Client::Errors::RateLimitError
             # ... track which attempt this is,
             # ... if it's the 1st attempt, sleep 30 seconds and try again
             # ... if it's the 2nd attempt, sleep 60 seconds and try again
