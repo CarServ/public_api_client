@@ -16,7 +16,8 @@ module Carserv
 
           def fetch(id:)
             request do
-              puts "Hello from fetcher"
+              includes(:appointment, :customer, :vehicle, :repair_shop, :service_advisor, :technician, :inspections)
+                .find(id).first
             end
           end
         end
