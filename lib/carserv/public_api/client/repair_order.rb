@@ -10,7 +10,7 @@ module Carserv
         class << self
           def list(start_date:, end_date:, page: 1)
             request do
-              includes(:customer)
+              includes(:appointment, :customer, :vehicle, :repair_shop)
                 .with_params(from: start_date, to: end_date).page(page).all
             end
           end

@@ -21,25 +21,32 @@ module Carserv
           end
 
           def request
+            attempts ||= 0
             yield
           rescue JsonApiClient::Errors::InternalServerError
-            puts 'Internal Server Error!'
+            handle_error_response({ status: 500, message: 'Internal Server Error!' })
           rescue JsonApiClient::Errors::NotAuthorized
-            puts 'Not Authorized!'
+            handle_error_response({ status: 401, message: 'Not Authorized!' })
           rescue JsonApiClient::Errors::NotFound
-            puts 'Not Found!'
+            handle_error_response({ status: 404, message: 'Not Found!' })
           rescue JsonApiClient::Errors::RequestTimeout
-            puts 'Request Timeout!'
+            if (attempts += 1) < 2
+              sleep 5
+              retry
+            end
+            handle_error_response({ status: 408, message: 'Request Timeout!' })
           rescue JsonApiClient::Errors::TooManyRequests
-            puts 'Too Many Requests!'
-          rescue Net::OpenTimeout, Net::ReadTimeout
-            puts 'Open/Read Timeout!'
+            handle_error_response({ status: 429, message: 'Too Many Requests!' })
           # rescue Carserv::PublicApi::Client::Errors::RateLimitError
             # ... track which attempt this is,
             # ... if it's the 1st attempt, sleep 30 seconds and try again
             # ... if it's the 2nd attempt, sleep 60 seconds and try again
             # ... if it's the 3rd attempt, sleep 3 minutes and try again
             # ... if it's the 4th attempt, re-raise the error
+          end
+
+          def handle_error_response(status:, message:)
+            { status: status, message: message }
           end
         end
       end
