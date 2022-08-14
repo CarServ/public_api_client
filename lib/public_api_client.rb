@@ -3,6 +3,7 @@
 require_relative 'carserv/public_api/client/config'
 require_relative 'carserv/public_api/client/base'
 require_relative 'carserv/public_api/client/repair_order'
+require_relative 'carserv/public_api/client/errors/rate_limit_error'
 
 module Carserv
   module PublicApi
