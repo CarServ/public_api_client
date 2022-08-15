@@ -30,7 +30,11 @@ module Carserv
             end
           rescue JsonApiClient::Errors::InternalServerError
             error_response({ status: 500 })
-          rescue JsonApiClient::Errors::NotAuthorized
+          rescue JsonApiClient::Errors::NotAuthorized => e
+            if (attempts += 1) < 2
+              refresh_access_token
+              retry
+            end
             error_response({ status: 401 })
           rescue JsonApiClient::Errors::NotFound
             error_response({ status: 404 })
@@ -62,6 +66,10 @@ module Carserv
 
           def token
             Carserv::PublicApi::Client::Authenticator.access_token
+          end
+
+          def refresh_access_token
+            Carserv::PublicApi::Client::Authenticator.refresh_access_token
           end
         end
       end

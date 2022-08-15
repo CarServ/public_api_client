@@ -60,7 +60,6 @@ module Carserv
 
           def request
             yield
-          rescue Net::OpenTimeout, Net::ReadTimeout
           end
 
           def api_key
