@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'carserv/public_api/client/config'
+require_relative 'carserv/public_api/client/authenticator'
 require_relative 'carserv/public_api/client/base'
 require_relative 'carserv/public_api/client/repair_order'
 require_relative 'carserv/public_api/client/errors/rate_limit_error'

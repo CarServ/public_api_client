@@ -22,8 +22,7 @@ module Carserv
           private
 
           def fetch_access_token
-            token = redis.hget(cache_key, :access_token)
-            token || new_access_token
+            redis.hget(cache_key, :access_token) || new_access_token
           end
 
           def cache_access_token(token)
@@ -40,10 +39,8 @@ module Carserv
 
           def request_access_token
             url = 'http://localhost:3000'
-            api_key = Carserv::PublicApi::Client.config.api_key
-            api_secret = Carserv::PublicApi::Client.config.api_secret
 
-            return nil if api_key.empty? || api_secret.empty?
+            return nil if api_key.nil? || api_secret.nil?
 
             conn = Faraday.new(url: url, headers: { 'Content-Type' => 'application/json' })
             response = conn.post('/public/api/v2/access_token.json') do |req|
@@ -64,6 +61,14 @@ module Carserv
           def request
             yield
           rescue Net::OpenTimeout, Net::ReadTimeout
+          end
+
+          def api_key
+            Carserv::PublicApi::Client.config.api_key
+          end
+
+          def api_secret
+            Carserv::PublicApi::Client.config.api_secret
           end
         end
       end

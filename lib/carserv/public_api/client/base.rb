@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json_api_client'
-require_relative 'errors/rate_limit_error'
 
 module Carserv
   module PublicApi
@@ -24,31 +23,45 @@ module Carserv
             end
           end
 
-          def request
+          def request(&block)
             attempts ||= 0
-            yield
+            with_headers(Authorization: "Bearer #{token}") do
+              yield block
+            end
           rescue JsonApiClient::Errors::InternalServerError
-            handle_error_response({ status: 500, message: 'Internal Server Error!' })
+            error_response({ status: 500 })
           rescue JsonApiClient::Errors::NotAuthorized
-            handle_error_response({ status: 401, message: 'Not Authorized!' })
+            error_response({ status: 401 })
           rescue JsonApiClient::Errors::NotFound
-            handle_error_response({ status: 404, message: 'Not Found!' })
+            error_response({ status: 404 })
           rescue JsonApiClient::Errors::RequestTimeout
             if (attempts += 1) < 2
               sleep 5
               retry
             end
-            handle_error_response({ status: 408, message: 'Request Timeout!' })
+            error_response({ status: 408 })
           rescue Carserv::PublicApi::Client::Errors::RateLimitError => e
-            if e.check_retry({ retry_count: attempts += 1 })
-              retry
-            else
-              handle_error_response({ status: 429, message: 'Too Many Requests!' })
-            end
+            e.check_retry({ retry_count: attempts += 1 }) ? retry : error_response({ status: 429 })
           end
 
-          def handle_error_response(status:, message:)
+          def error_response(status:)
+            case status
+            when 500
+              message = 'Internal Server Error!'
+            when 401
+              message = 'Not Authorized!'
+            when 404
+              message = 'Not Found!'
+            when 408
+              message = 'Request Timeout!'
+            when 429
+              message = 'Too Many Requests!'
+            end
             { status: status, message: message }
+          end
+
+          def token
+            Carserv::PublicApi::Client::Authenticator.access_token
           end
         end
       end
