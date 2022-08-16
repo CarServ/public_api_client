@@ -10,6 +10,7 @@ require_relative 'carserv/public_api/client/globals'
 
 module Carserv
   module PublicApi
+    # Client
     module Client
       class << self
         attr_accessor :config

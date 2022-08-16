@@ -5,6 +5,7 @@ require 'faraday'
 module Carserv
   module PublicApi
     module Client
+      # Config
       class Config
         DEFAULT_ITEMS_PER_PAGE = 50
 

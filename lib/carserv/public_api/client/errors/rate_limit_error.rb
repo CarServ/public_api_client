@@ -6,6 +6,7 @@ module Carserv
   module PublicApi
     module Client
       module Errors
+        # RateLimitError
         class RateLimitError < JsonApiClient::Errors::TooManyRequests
           attr_reader :env
 

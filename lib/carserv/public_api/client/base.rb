@@ -6,6 +6,7 @@ require_relative 'globals'
 module Carserv
   module PublicApi
     module Client
+      # Base
       class Base < JsonApiClient::Resource
         self.raise_on_blank_find_param = true
         self.site = Carserv::PublicApi::Client::PUBLIC_API_BASE_URL
@@ -14,12 +15,12 @@ module Carserv
         }
 
         class << self
-          def list(page: 1)
+          def list(*)
             request do
             end
           end
 
-          def fetch(id:)
+          def fetch(*)
             request do
             end
           end

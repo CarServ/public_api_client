@@ -3,6 +3,7 @@
 module Carserv
   module PublicApi
     module Client
+      # RepairOrder
       class RepairOrder < Carserv::PublicApi::Client::Base
         class << self
           def list(start_date:, end_date:, page: 1)

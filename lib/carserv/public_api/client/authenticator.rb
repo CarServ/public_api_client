@@ -8,6 +8,7 @@ Faraday.default_adapter = :net_http
 module Carserv
   module PublicApi
     module Client
+      # Authenticator
       class Authenticator
         class << self
           def access_token
