@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'config'
 require 'faraday'
 require 'faraday/net_http'
 require 'redis'
@@ -38,12 +37,13 @@ module Carserv
           end
 
           def request_access_token
-            url = 'http://localhost:3000'
-
             return nil if api_key.nil? || api_secret.nil?
 
-            conn = Faraday.new(url: url, headers: { 'Content-Type' => 'application/json' })
-            response = conn.post('/public/api/v2/access_token.json') do |req|
+            conn = Faraday.new(
+              url: Carserv::PublicApi::Client::AUTHENTICATION_BASE_URL,
+              headers: { 'Content-Type' => 'application/json' }
+            )
+            response = conn.post(Carserv::PublicApi::Client::AUTHENTICATION_API_PATH) do |req|
               req.body = { key: api_key, secret: api_secret }.to_json
             end
             response_body = JSON.parse(response.body)

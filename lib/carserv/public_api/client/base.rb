@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require 'json_api_client'
+require_relative 'globals'
 
 module Carserv
   module PublicApi
     module Client
       class Base < JsonApiClient::Resource
         self.raise_on_blank_find_param = true
-        self.site = 'http://localhost:3000/public/api/v2/'
+        self.site = Carserv::PublicApi::Client::PUBLIC_API_BASE_URL
         connection_options[:status_handlers] = {
           429 => ->(env) { raise Carserv::PublicApi::Client::Errors::RateLimitError, env }
         }
