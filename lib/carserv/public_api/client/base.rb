@@ -26,33 +26,23 @@ module Carserv
 
           def request(&block)
             attempts ||= 0
-            with_headers(Authorization: "Bearer #{token}") do
+            with_headers('Authorization': "Bearer #{token}", 'Content-Type': 'application/json') do
               yield block
             end
           rescue JsonApiClient::Errors::InternalServerError
             error_response({ status: 500 })
           rescue JsonApiClient::Errors::NotAuthorized => e
-            if (attempts += 1) < 2
-              refresh_access_token
-              retry
-            end
-            error_response({ status: 401 })
+            (attempts += 1) < 2 ? (refresh_access_token && retry) : error_response({ status: 401 })
           rescue JsonApiClient::Errors::NotFound
             error_response({ status: 404 })
           rescue JsonApiClient::Errors::RequestTimeout
-            if (attempts += 1) < 2
-              sleep 5
-              retry
-            end
-            error_response({ status: 408 })
+            (attempts += 1) < 2 ? (sleep(5) && retry) : error_response({ status: 408 })
           rescue Carserv::PublicApi::Client::Errors::RateLimitError => e
             e.check_retry({ retry_count: attempts += 1 }) ? retry : error_response({ status: 429 })
           end
 
           def error_response(status:)
             case status
-            when 500
-              message = 'Internal Server Error!'
             when 401
               message = 'Not Authorized!'
             when 404
@@ -61,6 +51,8 @@ module Carserv
               message = 'Request Timeout!'
             when 429
               message = 'Too Many Requests!'
+            when 500
+              message = 'Internal Server Error!'
             end
             { status: status, message: message }
           end
