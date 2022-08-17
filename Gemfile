@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
+gem 'rake'
 
 gemspec
-
-gem 'json_api_client', github: 'https://github.com/JsonApiClient/json_api_client.git', branch: 'master'

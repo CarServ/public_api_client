@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'faraday', '>= 0.15.2', '< 2.0'
   s.add_dependency 'json_api_client', '1.21.0'
   s.add_dependency 'redis'
+  s.test_files = Dir.glob('test/*_test.rb')
 end
