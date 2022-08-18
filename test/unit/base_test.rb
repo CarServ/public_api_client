@@ -6,7 +6,7 @@ class BaseTest < MiniTest::Test
   def setup; end
 
   def test_error_response
-    expected_response = {:status => 401, :message => "Not Authorized!"}
+    expected_response = { status: 401, message: 'Not Authorized!' }
     assert_equal expected_response, Base.error_response(status: 401)
   end
 

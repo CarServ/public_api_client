@@ -4,9 +4,7 @@ Bundler.require(:default, :test)
 
 require 'minitest/autorun'
 
-unless defined?(Minitest::Test)
-  Minitest::Test = Minitest::Unit::TestCase
-end
+Minitest::Test = Minitest::Unit::TestCase unless defined?(Minitest::Test)
 
 class TestResource < Carserv::PublicApi::Client::Base
   self.site = 'http://example.com/'
