@@ -30,6 +30,8 @@ module Carserv
             with_headers('Authorization': "Bearer #{token}", 'Content-Type': 'application/json') do
               yield block
             end
+          rescue JsonApiClient::Errors::ClientError
+            error_response({ status: 400 })
           rescue JsonApiClient::Errors::InternalServerError
             error_response({ status: 500 })
           rescue JsonApiClient::Errors::NotAuthorized => e
@@ -44,6 +46,8 @@ module Carserv
 
           def error_response(status:)
             case status
+            when 400
+              message = 'Bad request!'
             when 401
               message = 'Not Authorized!'
             when 404

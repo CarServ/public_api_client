@@ -12,6 +12,9 @@ class TestResource < Carserv::PublicApi::Client::Base
   self.site = 'http://example.com/'
 end
 
+class Base < TestResource
+end
+
 class RepairOrder < TestResource
 end
 
