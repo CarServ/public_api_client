@@ -15,7 +15,7 @@ module Carserv
 
           def fetch(id:)
             request do
-              includes(:appointment, :customer, :vehicle, :repair_shop, :service_advisor, :technician, :inspections)
+              includes(:appointment, :customer, :vehicle, :repair_shop, :service_advisor, :technician)
                 .find(id).first
             end
           end
