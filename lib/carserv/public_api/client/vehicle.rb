@@ -3,20 +3,16 @@
 module Carserv
   module PublicApi
     module Client
-      # Customer
-      class Customer < Carserv::PublicApi::Client::Base
+      # Vehicle
+      class Vehicle < Carserv::PublicApi::Client::Base
         belongs_to :repair_order, shallow_path: true
         class << self
-          def list(page: 1)
-            request do
-              page(page).all
-            end
+          def list(start_date:, end_date:, page: 1)
+            with_params(from: start_date, to: end_date).page(page).all
           end
 
           def fetch(id:)
-            request do
-              find(id).first
-            end
+            find(id).first
           end
         end
       end

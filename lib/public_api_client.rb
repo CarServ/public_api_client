@@ -8,6 +8,8 @@ require_relative 'carserv/public_api/client/customer'
 require_relative 'carserv/public_api/client/errors/rate_limit_error'
 require_relative 'carserv/public_api/client/version'
 require_relative 'carserv/public_api/client/globals'
+require_relative 'carserv/public_api/client/vehicle'
+require_relative 'carserv/public_api/client/service_advisor'
 
 module Carserv
   module PublicApi
