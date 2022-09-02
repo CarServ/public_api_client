@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.add_dependency 'faraday', '>= 0.15.2', '< 2.0'
   s.add_dependency 'json_api_client', '1.21.0'
-  s.add_dependency 'redis'
-  s.test_files = Dir.glob('test/*_test.rb')
+  s.add_dependency 'redis', '~> 4.2.5'
+  s.required_ruby_version = '> 3.0.0'
+  s.metadata['rubygems_mfa_required'] = 'true'
 end
