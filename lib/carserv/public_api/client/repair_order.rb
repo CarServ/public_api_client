@@ -11,7 +11,7 @@ module Carserv
             params[:filter] = {}
             params[:filter][:closed_at] = { from: start_date, to: end_date }
             request do
-              includes(:appointment, :customer, :vehicle, :repair_shop)
+              includes(:appointment, :customer, :vehicle, :repair_shop, :service_advisor, :technician)
                 .with_params(params).page(page).all
             end
           end

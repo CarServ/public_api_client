@@ -9,13 +9,15 @@ module Carserv
         class << self
           def list(page: 1)
             request do
-              page(page).all
+              includes(:appointments, :jobs, :vehicles)
+                .page(page).all
             end
           end
 
           def fetch(id:)
             request do
-              find(id).first
+              includes(:appointments, :jobs, :vehicles)
+                .find(id).first
             end
           end
         end
