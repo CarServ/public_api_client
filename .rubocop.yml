@@ -10,6 +10,8 @@ Metrics/AbcSize:
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
+  Exclude:
+    - 'test/unit/*'
   Max: 101
 
 # Offense count: 1
@@ -20,6 +22,8 @@ Metrics/CyclomaticComplexity:
 # Offense count: 1
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
+  Exclude:
+    - 'test/unit/*'
   Max: 30
 
 # Offense count: 286
