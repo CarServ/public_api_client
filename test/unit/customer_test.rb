@@ -75,6 +75,9 @@ class CustomerTest < MiniTest::Test
       response = Customer.fetch(id: 205701)
       assert_equal 'customers', response[:data][:type]
       assert_equal '205701', response[:data][:id]
+      assert !(response[:data][:relationships][:appointments]).nil?
+      assert !(response[:data][:relationships][:jobs]).nil?
+      assert !(response[:data][:relationships][:vehicles]).nil?
     end
   end
 
@@ -156,6 +159,9 @@ class CustomerTest < MiniTest::Test
       response = Customer.list
       assert_equal 'customers', response[:data][0][:type]
       assert_equal 1, response[:data].length
+      assert !(response[:data][0][:relationships][:appointments]).nil?
+      assert !(response[:data][0][:relationships][:jobs]).nil?
+      assert !(response[:data][0][:relationships][:vehicles]).nil?
     end
   end
 end
