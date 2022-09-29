@@ -11,6 +11,8 @@ require_relative 'carserv/public_api/client/globals'
 require_relative 'carserv/public_api/client/vehicle'
 require_relative 'carserv/public_api/client/service_advisor'
 require_relative 'carserv/public_api/client/appointment'
+require_relative 'carserv/public_api/client/repair_shop'
+require_relative 'carserv/public_api/client/technician'
 
 module Carserv
   module PublicApi
