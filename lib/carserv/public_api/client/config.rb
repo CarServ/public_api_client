@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'faraday'
+require 'dotenv'
+
+Dotenv.load
 
 module Carserv
   module PublicApi

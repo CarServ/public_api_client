@@ -41,10 +41,10 @@ module Carserv
             return nil if api_key.nil? || api_secret.nil?
 
             conn = Faraday.new(
-              url: Carserv::PublicApi::Client::AUTHENTICATION_BASE_URL,
+              url: ENV['AUTHENTICATION_BASE_URL'],
               headers: { 'Content-Type' => 'application/json' }
             )
-            response = conn.post(Carserv::PublicApi::Client::AUTHENTICATION_API_PATH) do |req|
+            response = conn.post(ENV['AUTHENTICATION_API_PATH']) do |req|
               req.body = { key: api_key, secret: api_secret }.to_json
             end
             response_body = JSON.parse(response.body)

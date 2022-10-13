@@ -6,6 +6,7 @@ module Carserv
       # Customer
       class Customer < Carserv::PublicApi::Client::Base
         belongs_to :repair_order, shallow_path: true
+
         class << self
           def list(page: 1)
             request do

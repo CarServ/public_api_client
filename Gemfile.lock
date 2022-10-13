@@ -1,0 +1,110 @@
+PATH
+  remote: .
+  specs:
+    public_api_client (0.0.1)
+      faraday (>= 0.15.2, < 2.0)
+      json_api_client (= 1.21.0)
+      redis (~> 4.2.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (7.0.4)
+      activesupport (= 7.0.4)
+    activesupport (7.0.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
+    ast (2.4.2)
+    concurrent-ruby (1.1.10)
+    dotenv (2.8.1)
+    faraday (1.10.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+    json (2.6.2)
+    json_api_client (1.21.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      addressable (~> 2.2)
+      faraday (>= 0.15.2, < 2.0)
+      faraday_middleware (>= 0.9.0, < 2.0)
+      rack (>= 0.2)
+    minitest (5.16.3)
+    minitest-ci (3.4.0)
+      minitest (>= 5.0.6)
+    minitest-profile (0.0.2)
+    minitest-spec-context (0.0.4)
+    multipart-post (2.2.3)
+    parallel (1.22.1)
+    parser (3.1.2.1)
+      ast (~> 2.4.1)
+    public_suffix (5.0.0)
+    rack (3.0.0)
+    rainbow (3.1.1)
+    rake (13.0.6)
+    redis (4.2.5)
+    regexp_parser (2.6.0)
+    rexml (3.2.5)
+    rubocop (1.36.0)
+      json (~> 2.3)
+      parallel (~> 1.10)
+      parser (>= 3.1.2.1)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.20.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.21.0)
+      parser (>= 3.1.1.0)
+    rubocop-minitest (0.22.2)
+      rubocop (>= 0.90, < 2.0)
+    ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
+    tzinfo (2.0.5)
+      concurrent-ruby (~> 1.0)
+    unicode-display_width (2.3.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  dotenv
+  minitest
+  minitest-ci
+  minitest-profile
+  minitest-spec-context
+  public_api_client!
+  rake
+  rubocop
+  rubocop-minitest
+
+BUNDLED WITH
+   2.3.17

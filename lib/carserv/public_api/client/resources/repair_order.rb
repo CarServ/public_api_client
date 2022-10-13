@@ -6,6 +6,7 @@ module Carserv
       # RepairOrder
       class RepairOrder < Carserv::PublicApi::Client::Base
         belongs_to :repair_shop, shallow_path: true
+
         class << self
           def list(start_date:, end_date:, page: 1)
             params = {}
