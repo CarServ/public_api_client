@@ -55,7 +55,7 @@ module Carserv
             when 500
               message = "Internal Server Error!"
             end
-            { status:, message: }
+            { status: status, message: message }
           end
 
           def token
