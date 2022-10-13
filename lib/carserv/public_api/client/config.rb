@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'faraday'
-require 'dotenv'
+require "faraday"
+require "dotenv"
 
 Dotenv.load
 

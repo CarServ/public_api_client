@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json_api_client'
+require "json_api_client"
 
 module Carserv
   module PublicApi

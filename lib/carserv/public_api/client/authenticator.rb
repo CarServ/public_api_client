@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'faraday'
-require 'faraday/net_http'
-require 'redis'
+require "faraday"
+require "faraday/net_http"
+require "redis"
 Faraday.default_adapter = :net_http
 
 module Carserv
@@ -41,14 +41,14 @@ module Carserv
             return nil if api_key.nil? || api_secret.nil?
 
             conn = Faraday.new(
-              url: ENV['AUTHENTICATION_BASE_URL'],
-              headers: { 'Content-Type' => 'application/json' }
+              url: ENV.fetch("AUTHENTICATION_BASE_URL", nil),
+              headers: { "Content-Type" => "application/json" }
             )
-            response = conn.post(ENV['AUTHENTICATION_API_PATH']) do |req|
+            response = conn.post(ENV.fetch("AUTHENTICATION_API_PATH", nil)) do |req|
               req.body = { key: api_key, secret: api_secret }.to_json
             end
             response_body = JSON.parse(response.body)
-            response_body['jwt'] || nil
+            response_body["jwt"] || nil
           end
 
           def cache_key

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'json_api_client'
+require "json_api_client"
 
 module Carserv
   module PublicApi
@@ -8,7 +8,7 @@ module Carserv
       # Base
       class Base < JsonApiClient::Resource
         self.raise_on_blank_find_param = true
-        self.site = ENV['PUBLIC_API_BASE_URL']
+        self.site = ENV.fetch("PUBLIC_API_BASE_URL", nil)
 
         connection_options[:status_handlers] = {
           429 => ->(env) { raise Carserv::PublicApi::Client::Errors::RateLimitError, env }
@@ -27,7 +27,7 @@ module Carserv
 
           def request(&block)
             attempts ||= 0
-            with_headers(Authorization: "Bearer #{token}", 'Content-Type': 'application/json') do
+            with_headers(Authorization: "Bearer #{token}", "Content-Type": "application/json") do
               yield block
             end
           rescue JsonApiClient::Errors::InternalServerError
@@ -45,17 +45,17 @@ module Carserv
           def error_response(status:)
             case status
             when 401
-              message = 'Not Authorized!'
+              message = "Not Authorized!"
             when 404
-              message = 'Not Found!'
+              message = "Not Found!"
             when 408
-              message = 'Request Timeout!'
+              message = "Request Timeout!"
             when 429
-              message = 'Too Many Requests!'
+              message = "Too Many Requests!"
             when 500
-              message = 'Internal Server Error!'
+              message = "Internal Server Error!"
             end
-            { status: status, message: message }
+            { status:, message: }
           end
 
           def token
