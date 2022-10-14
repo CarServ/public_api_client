@@ -2,28 +2,35 @@
 
 require_relative "../../../../../test_helper"
 
-# BaseTest
-class BaseTest < MiniTest::Test
-  def setup; end
-
-  def test_error_response
-    expected_response = { status: 401, message: "Not Authorized!" }
-    assert_equal expected_response, Base.error_response(status: 401)
+describe "#error_response" do
+  context "when status is 401" do
+    it "should return correct message" do
+      expected_response = { status: 401, message: "Not Authorized!" }
+      assert_equal expected_response, Base.error_response(status: 401)
+    end
   end
+end
 
-  def test_access_token
+describe "#token" do
+  it "does something else" do
     Base.stub :token, "test_token" do
       assert_equal "test_token", Base.token
     end
   end
+end
 
-  def test_refresh_access_token
-    Base.stub :token, "new_token" do
-      assert_equal "new_token", Base.token
+describe "#refresh_access_token" do
+  it "does something else" do
+    Base.stub :refresh_access_token, "test_token" do
+      assert_equal "test_token", Base.refresh_access_token
     end
   end
+end
 
-  def test_blank_find_params
-    assert Base.raise_on_blank_find_param
+describe "#raise_on_blank_find_param" do
+  context "when missing param" do
+    it "should assert blank find" do
+      assert Base.raise_on_blank_find_param
+    end
   end
 end

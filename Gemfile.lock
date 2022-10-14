@@ -100,15 +100,15 @@ PLATFORMS
 
 DEPENDENCIES
   client!
-  dotenv
-  minitest
-  minitest-ci
-  minitest-profile
-  minitest-spec-context
+  dotenv (~> 2.8, >= 2.8.1)
+  minitest (~> 5.16, >= 5.16.3)
+  minitest-ci (~> 3.4)
+  minitest-profile (~> 0.0.2)
+  minitest-spec-context (~> 0.0.4)
   rake
-  rubocop
-  rubocop-minitest
-  rubocop-performance
+  rubocop (~> 1.36)
+  rubocop-minitest (~> 0.22.2)
+  rubocop-performance (~> 1.15)
 
 BUNDLED WITH
    2.3.17

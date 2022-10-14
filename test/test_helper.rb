@@ -3,6 +3,7 @@
 Bundler.require(:default, :test)
 
 require "minitest/autorun"
+require "minitest-spec-context"
 
 Minitest::Test = Minitest::Unit::TestCase unless defined?(Minitest::Test)
 
