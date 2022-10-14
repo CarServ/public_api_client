@@ -10,8 +10,7 @@ module Carserv
         class << self
           def list(page: 1)
             request do
-              includes(:appointments, :jobs, :vehicles)
-                .page(page).all
+              page(page).all
             end
           end
 
