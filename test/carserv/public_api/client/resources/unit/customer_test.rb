@@ -35,12 +35,6 @@ describe "#fetch" do
         customer = Customer.fetch(id: 205_701)
         assert_kind_of Customer, customer
         assert_equal "246443", customer.id
-        # refute_nil customer.jobs
-        # assert_equal "customers", response[:data][:type]
-        # assert_equal "205701", response[:data][:id]
-        # refute_nil(response[:data][:relationships][:appointments])
-        # refute_nil(response[:data][:relationships][:jobs])
-        # refute_nil(response[:data][:relationships][:vehicles])
       end
     end
   end
@@ -58,79 +52,32 @@ describe "#list" do
 
   context "when the customer records present" do
     it "should return list of customer records" do
-      list_response = {
-        data: [
-          {
-            id: "243674",
-            type: "customers",
-            attributes: {
-              address: " ",
-              birthday: " ",
-              business_name: ". .",
-              company_name: " ",
-              contact_preference: "Text",
-              created_at: "2021-07-25T06:59:00+00:00",
-              emails: [
-                {
-                  email_address: " ",
-                  is_primary: true
-                }
-              ],
-              first_name: ".",
-              is_fleet: false,
-              last_name: ".",
-              marketing_optn: true,
-              phone_numbers: [
-                {
-                  phone_number: "+18582334567",
-                  is_primary: true,
-                  description: " "
-                }
-              ],
-              transactional_optn: true,
-              updated_at: "2021-07-25T06:59:00+00:00"
-            },
-            relationships: {
-              fleet: {
-                links: {
-                  related: " "
-                }
-              },
-              appointments: {
-                links: {
-                  related: "localhost/public/api/v2/appointments?filter[customer_id]=243674"
-                },
-                data: []
-              },
-              jobs: {
-                links: {
-                  related: "localhost/public/api/v2/repair_orders?filter[customer_id]=243674"
-                },
-                data: []
-              },
-              vehicles: {
-                links: {
-                  related: "localhost/public/api/v2/vehicles?filter[customer_id]=243674"
-                },
-                data: [
-                  {
-                    type: "vehicles",
-                    id: "372280"
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        meta: {}
-      }
-      Customer.stub :list, list_response do
+      customer_records = [
+        { "type" => "customers",
+          "id" => "120450",
+          "address" => "",
+          "birthday" => "2017-03-17T00:00:00+00:00",
+          "business_name" => " ,",
+          "company_name" => nil,
+          "contact_preference" => "Text",
+          "created_at" => "2020-04-26T22:01:50+00:00",
+          "emails" => [{ "email_address" => "",
+                         "is_primary" => true }],
+          "first_name" => nil,
+          "is_fleet" => false,
+          "last_name" => ",",
+          "marketing_optn" => true,
+          "phone_numbers" => [{ "phone_number" => "+12817900997", "is_primary" => true,
+                                "description" => "mobile_phone" },
+                              { "phone_number" => "+12817900997", "is_primary" => false,
+                                "description" => "home_phone" }],
+          "transactional_optn" => true,
+          "updated_at" => "2020-11-27T19:22:38+00:00" }
+      ]
+      Customer.stub :list, customer_records do
         response = Customer.list
-        assert_equal "customers", response[:data][0][:type]
-        assert_equal 1, response[:data].length
-        refute_nil(response[:data][0][:relationships][:appointments])
-        refute_nil(response[:data][0][:relationships][:jobs])
-        refute_nil(response[:data][0][:relationships][:vehicles])
+        assert_equal "customers", response.first["type"]
+        assert_equal 1, response.length
       end
     end
   end
