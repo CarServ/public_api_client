@@ -10,9 +10,7 @@ module Carserv
   module PublicApi
     # Client
     module Client
-      class << self
-        attr_accessor :config
-      end
+      attr_accessor :config
 
       def self.config
         @config ||= Config.new

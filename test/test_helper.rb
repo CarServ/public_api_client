@@ -3,16 +3,11 @@
 Bundler.require(:default, :test)
 
 require "minitest/autorun"
-require_relative "../../resources"
-require_relative "../../errors/rate_limit_error"
-require_relative "../../config"
-require_relative "../../authenticator"
-require_relative "../../version"
 
 Minitest::Test = Minitest::Unit::TestCase unless defined?(Minitest::Test)
 
 class TestResource < Carserv::PublicApi::Client::Base
-  self.site = "http://example.com/"
+  self.site = ENV.fetch("PUBLIC_API_BASE_URL", nil)
 end
 
 class Base < TestResource

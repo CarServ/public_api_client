@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "../test_helper"
+require_relative "../../../../../test_helper"
 
+# CustomerTest
 class CustomerTest < MiniTest::Test
   def setup; end
 
   def test_that_fetch_returns_nil
-    assert_nil Customer.fetch({ id: 1 })
+    assert_nil Customer.fetch(id: 1)
   end
 
   def test_that_fetch_returns_data

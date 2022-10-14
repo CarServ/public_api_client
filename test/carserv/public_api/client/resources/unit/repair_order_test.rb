@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "../test_helper"
+require_relative "../../../../../test_helper"
 
+# RepairOrderTest
 class RepairOrderTest < MiniTest::Test
   def setup; end
 
   def test_that_fetch_returns_nil
-    assert_nil RepairOrder.fetch({ id: 1 })
+    assert_nil RepairOrder.fetch(id: 1)
   end
 
   def test_that_list_returns_empty
@@ -205,7 +206,7 @@ class RepairOrderTest < MiniTest::Test
               block_fips: "",
               sub_premise: ""
             },
-            logo_url: "//files.carserv.io/shops/1/shop-logos/photos/01a641f5-5da4-438d-afa3-83842c2468fc/featued-headless-ecommerce (3).jpg",
+            logo_url: "//files.carserv.io/shops/1/shop-logos/photos/c2468fc/featued-headless-ecommerce.jpg",
             marketing_opt_in_text: "",
             max_profit_percent: 70.0,
             min_profit_percent: 62.0,

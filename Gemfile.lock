@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    public_api_client (0.0.1)
+    client (0.0.1)
       faraday (>= 0.15.2, < 2.0)
       json_api_client (= 1.21.0)
       redis (~> 4.2.5)
@@ -99,12 +99,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  client!
   dotenv
   minitest
   minitest-ci
   minitest-profile
   minitest-spec-context
-  public_api_client!
   rake
   rubocop
   rubocop-minitest
