@@ -32,9 +32,31 @@ describe "#fetch" do
                                      "updated_at" => "2021-08-07T18:50:11+00:00" }
 
       Customer.stub :fetch, customer_record do
-        customer = Customer.fetch(id: 205_701)
+        customer = Customer.fetch(id: "246443")
         assert_kind_of Customer, customer
         assert_equal "246443", customer.id
+      end
+    end
+  end
+
+  context "when the customer has the associated jobs" do
+    it "should return jobs" do
+      jobs_response = [{ "type" => "repair_orders",
+                         "id" => "993957",
+                         "closed_at" => "2015-06-06T18:30:46+00:00",
+                         "created_at" => "2015-06-06T05:00:00+00:00",
+                         "is_estimate" => false,
+                         "is_quick_lube" => false,
+                         "original_type" => nil,
+                         "state_closed" => true,
+                         "updated_at" => "2020-11-27T21:24:13+00:00",
+                         "customers_repair_shop_id" => 263_662 }]
+      mock_customer = MiniTest::Mock.new
+      mock_customer.expect :jobs, jobs_response
+      Customer.stub :new, mock_customer do
+        customer = Customer.new
+        customer_jobs = customer.jobs
+        refute_nil customer_jobs
       end
     end
   end

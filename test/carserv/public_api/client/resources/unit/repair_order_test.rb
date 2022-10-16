@@ -52,26 +52,26 @@ describe "#fetch" do
 
   context "when the repair order has the associated customer" do
     it "should return customer" do
-      mock_customer = { "type" => "customers",
-                        "id" => "246443",
-                        "address" => nil,
-                        "birthday" => nil,
-                        "business_name" => "Donald Evans",
-                        "company_name" => nil,
-                        "contact_preference" => nil,
-                        "created_at" => "2021-08-07T18:50:11+00:00",
-                        "emails" => [{ "email_address" => "donaldevans77@yahoo.com",
-                                       "is_primary" => true }],
-                        "first_name" => "Donald",
-                        "is_fleet" => false,
-                        "last_name" => "Evans",
-                        "marketing_optn" => true,
-                        "phone_numbers" => [{ "phone_number" => "+12817716056", "is_primary" => true,
-                                              "description" => "mobile_phone" }],
-                        "transactional_optn" => true,
-                        "updated_at" => "2021-08-07T18:50:11+00:00" }
+      customer_response = { "type" => "customers",
+                            "id" => "246443",
+                            "address" => nil,
+                            "birthday" => nil,
+                            "business_name" => "Donald Evans",
+                            "company_name" => nil,
+                            "contact_preference" => nil,
+                            "created_at" => "2021-08-07T18:50:11+00:00",
+                            "emails" => [{ "email_address" => "donaldevans77@yahoo.com",
+                                           "is_primary" => true }],
+                            "first_name" => "Donald",
+                            "is_fleet" => false,
+                            "last_name" => "Evans",
+                            "marketing_optn" => true,
+                            "phone_numbers" => [{ "phone_number" => "+12817716056", "is_primary" => true,
+                                                  "description" => "mobile_phone" }],
+                            "transactional_optn" => true,
+                            "updated_at" => "2021-08-07T18:50:11+00:00" }
       mock_repair_order = MiniTest::Mock.new
-      mock_repair_order.expect :customer, mock_customer
+      mock_repair_order.expect :customer, customer_response
       RepairOrder.stub :new, mock_repair_order do
         repair_order = RepairOrder.new
         customer = repair_order.customer
