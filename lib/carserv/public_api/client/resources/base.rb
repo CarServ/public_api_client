@@ -33,7 +33,12 @@ module Carserv
           rescue JsonApiClient::Errors::InternalServerError
             error_response(status: 500)
           rescue JsonApiClient::Errors::NotAuthorized
-            (attempts += 1) < 2 ? (refresh_access_token && retry) : error_response(status: 401)
+            if (attempts += 1) < 2
+              refresh_access_token
+              retry
+            else
+              error_response(status: 401)
+            end
           rescue JsonApiClient::Errors::NotFound
             error_response(status: 404)
           rescue JsonApiClient::Errors::RequestTimeout

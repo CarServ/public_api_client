@@ -18,11 +18,11 @@ module Carserv
           def check_retry(retry_count:)
             case retry_count
             when 1
-              wait_for(interval: 5)
+              wait_for(interval: 30)
             when 2
-              wait_for(interval: 10)
+              wait_for(interval: 60)
             when 3
-              wait_for(interval: 15)
+              wait_for(interval: 180)
             else
               false
             end
