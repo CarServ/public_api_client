@@ -7,7 +7,7 @@ $LOAD_PATH.unshift File.expand_path("lib", __dir__)
 require "carserv/public_api/client/version"
 
 Gem::Specification.new do |s|
-  s.name        = "client"
+  s.name        = "carserv_public_api_client"
   s.version     = Carserv::PublicApi::Client::VERSION
   s.summary     = "A client gem to consume the CarServ Public APIs"
   s.description = 'A client gem to consume the CarServ Public APIs"'

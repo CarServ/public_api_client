@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../test_helper"
+require "test_helper"
 
 describe "#initialize" do
   it "should return a config object" do
