@@ -79,8 +79,10 @@ describe Carserv::PublicApi::Client::RepairOrder do
           "transactional_optn" => true,
           "updated_at" => "2021-08-07T18:50:11+00:00"
         }
+
         mock_repair_order = MiniTest::Mock.new
         mock_repair_order.expect :customer, customer_response
+
         RepairOrder.stub :new, mock_repair_order do
           repair_order = RepairOrder.new
           customer = repair_order.customer
@@ -114,6 +116,7 @@ describe Carserv::PublicApi::Client::RepairOrder do
           "updated_at" => "2022-10-12T11:42:48+00:00",
           "customers_repair_shop_id" => 266_194
         }]
+
         RepairOrder.stub :list, repair_orders do
           response = RepairOrder.list
           assert_equal "repair_orders", response.first["type"]

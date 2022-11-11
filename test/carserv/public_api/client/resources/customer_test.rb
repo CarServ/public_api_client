@@ -60,8 +60,10 @@ describe Carserv::PublicApi::Client::Customer do
           "updated_at" => "2020-11-27T21:24:13+00:00",
           "customers_repair_shop_id" => 263_662
         }]
+
         mock_customer = MiniTest::Mock.new
         mock_customer.expect :jobs, jobs_response
+
         Customer.stub :new, mock_customer do
           customer = Customer.new
           customer_jobs = customer.jobs
@@ -115,6 +117,7 @@ describe Carserv::PublicApi::Client::Customer do
           "transactional_optn" => true,
           "updated_at" => "2020-11-27T19:22:38+00:00"
         }]
+
         Customer.stub :list, customer_records do
           response = Customer.list
           assert_equal "customers", response.first["type"]

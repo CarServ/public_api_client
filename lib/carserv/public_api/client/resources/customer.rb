@@ -8,9 +8,12 @@ module Carserv
         belongs_to :repair_order, shallow_path: true
 
         class << self
-          def list(page: 1)
+          def list(options: {}, page: 1)
+            params = {}
+            params[:filter] = options.present? && options[:filter].present? ? options[:filter] : {}
+
             request do
-              page(page).all
+              with_params(params).page(page).all
             end
           end
 
