@@ -49,7 +49,7 @@ operations = repair_order.operations
 parts = operations.first.parts
 labors = operations.first.labors
 sublets = operations.first.sublets
-other = operations.first.others
+others = operations.first.others
 
 repair_order.total
 ...
@@ -58,10 +58,10 @@ repair_order.total
 # Filter the list of customers based on the `business_name` `email` `first_name` `last_name` `phone_number` `is_fleet`, by providing the filter key and its value
 # options default to {}
 options = {filter: {first_name: 'test'}}
-                  OR
+options = {filter: {last_name: 'test'}}
+options = {filter: {business_name: 'test_buisness'}}
 options = {filter: {email: 'testets@gmail.com'}}
-                  OR
-options = {filter: {first_name: 'test', email: 'testets@gmail.com'}}
+options = {filter: {is_fleet: true, email: 'testets@gmail.com'}}
 customers = Carserv::PublicApi::Client::Customer.list(options: options, page: 2)
 
 # Fetch a specific Customer
