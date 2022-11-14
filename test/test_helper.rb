@@ -12,8 +12,29 @@ Minitest::Test = Minitest::Unit::TestCase unless defined?(Minitest::Test)
 class Base < Carserv::PublicApi::Client::Base
 end
 
-class RepairOrder < Carserv::PublicApi::Client::Base
+class Appointment < Carserv::PublicApi::Client::Base
 end
 
 class Customer < Carserv::PublicApi::Client::Base
+end
+
+class Inspection < Carserv::PublicApi::Client::Base
+end
+
+class Operation < Carserv::PublicApi::Client::Base
+end
+
+class Technician < Carserv::PublicApi::Client::Base
+end
+
+class RepairOrder < Carserv::PublicApi::Client::Base
+end
+
+class RepairShop < Carserv::PublicApi::Client::Base
+end
+
+class ServiceAdvisor < Carserv::PublicApi::Client::Base
+end
+
+class Vehicle < Carserv::PublicApi::Client::Base
 end

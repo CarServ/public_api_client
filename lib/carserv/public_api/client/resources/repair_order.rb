@@ -24,10 +24,15 @@ module Carserv
           def fetch(id:)
             request do
               includes(:appointment, :customer, :vehicle, :repair_shop,
-                       :service_advisor, :technician, :inspections, operations: %i[parts labors sublets others])
+                       :service_advisor, :technician, :inspections)
                 .find(id).first
             end
           end
+        end
+
+        def operations
+          options = { filter: { job_id: id.to_i } }
+          Carserv::PublicApi::Client::Operation.list(options:)
         end
       end
     end
